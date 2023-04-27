@@ -2,6 +2,9 @@
 
 require 'json'
 
+ALIASES_FILENAME = 'dumb_aliases.txt'
+COMMAND_COUNTS_FILENAME = 'command_counts.json'
+
 root_dir = __dir__.gsub('dumb-aliases', '')
 file = File.open("#{root_dir}.zsh_history")
 
@@ -15,19 +18,20 @@ end
 command_counts = Hash.new(0)
 commands.each { |command| command_counts[command] += 1 }
 
-# sort them and remove infrequently used
-command_counts = command_counts.filter { |k,v| v > 4 }.sort_by { |k,v| v }.reverse.to_h
+# sort commands and remove those infrequently used
+command_counts = command_counts.filter { |_, freq| freq > 4 }.sort_by { |_, freq| freq }.reverse.to_h
 
 # generate alias file
-File.open('dumb_aliases.txt', 'w') do |file|
-  command_counts.each do |command, _freq|
+File.open(ALIASES_FILENAME, 'w') do |alias_file|
+  command_counts.each do |command, _|
     next unless command
+
     first_letters = command.split(/[^a-zA-Z\d:]/).map { |word| word[0] }
-    next unless first_letters.length > 1 && first_letters.length < 5 # aliases should be short but not tooo short
-    dumb_alias = first_letters.join
-    file.puts "alias #{dumb_alias}=\"#{command}\""
+    next unless first_letters.length > 1 && first_letters.length < 5 # aliases should be short but not too short
+
+    alias_file.puts "alias #{first_letters.join}=\"#{command}\""
   end
 end
 
 # generate frequency file
-File.write('command_counts.json', JSON.pretty_generate(command_counts))
+File.write(COMMAND_COUNTS_FILENAME, JSON.pretty_generate(command_counts))
