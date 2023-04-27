@@ -1,0 +1,12 @@
+{
+  "git push": 932,
+  "bin/go": 170,
+  "git stash pop": 167,
+  "git commit": 149,
+  "rails c": 133,
+  "git pull origin develop": 126,
+  "git stash": 124,
+  "git add .": 121,
+  "git checkout develop": 119,
+  "bundle install": 104
+}
