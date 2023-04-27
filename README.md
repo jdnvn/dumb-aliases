@@ -1,7 +1,7 @@
 # dumb-aliases
 generates aliases from your most used shell commands
 
-## how to use
+## how to use it
 ```
 cd ~ && git clone https://github.com/jdnvn/dumb-aliases.git
 cd dumb-aliases
