@@ -4,12 +4,13 @@ require 'json'
 
 ALIASES_FILENAME = 'dumb_aliases.txt'
 COMMAND_COUNTS_FILENAME = 'command_counts.json'
+HISTORY_FILE = ARGV[0] == 'bash' ? '.bash_history' : '.zsh_history'
 
 root_dir = __dir__.gsub('dumb-aliases', '')
-file = File.open("#{root_dir}.zsh_history")
+shell_history = File.open("#{root_dir}#{HISTORY_FILE}")
 
 # remove extra fluff
-commands = file.readlines.map do |line|
+commands = shell_history.readlines.map do |line|
   line = line.chomp
   line.split(';').last
 end
