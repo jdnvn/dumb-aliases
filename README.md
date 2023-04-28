@@ -3,9 +3,9 @@ generates aliases from your most used shell commands
 
 ## how to use it
 ```
-cd ~ && git clone https://github.com/jdnvn/dumb-aliases.git
-cd dumb-aliases
-ruby aliaser.rb
+cd ~
+git clone https://github.com/jdnvn/dumb-aliases.git && cd dumb-aliases
+./aliaser
 ```
 this will generate two files:
 1. `command_counts.json` - lists all of your latest shell commands and how many times you've run them.
