@@ -24,7 +24,7 @@ this will generate two files:
   ...
 }
 ```
-2. `dumb_aliases.txt` - subject to change aliases for the commands to be edited/copied into your `.zshrc` or `.bashrc` file!
+2. `dumb_aliases.txt` - subject to change aliases for the commands to be edited/copied into your `.zshrc` or `.bashrc` file. Now all you gotta do is remember them!
 ```
 alias gp="git push"
 alias bg="bin/go"
