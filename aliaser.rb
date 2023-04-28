@@ -4,10 +4,13 @@ require 'json'
 
 ALIASES_FILENAME = 'dumb_aliases.txt'
 COMMAND_COUNTS_FILENAME = 'command_counts.json'
-HISTORY_FILE = ARGV[0] == 'bash' ? '.bash_history' : '.zsh_history'
+ZSH_HISTORY = '.zsh_history'
+BASH_HISTORY = '.bash_history'
 
 root_dir = __dir__.gsub('dumb-aliases', '')
-shell_history = File.open("#{root_dir}#{HISTORY_FILE}")
+zsh_history_path "#{root_dir}#{ZSH_HISTORY}"
+shell_history = File.open("#{root_dir}#{File.exists?(zsh_history_path) ? ZSH_HISTORY : BASH_HISTORY}")
+raise 'shell history file not found' unless shell_history
 
 # remove extra fluff
 commands = shell_history.readlines.map do |line|
