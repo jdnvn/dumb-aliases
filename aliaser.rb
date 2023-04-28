@@ -8,7 +8,7 @@ ZSH_HISTORY = '.zsh_history'
 BASH_HISTORY = '.bash_history'
 
 root_dir = __dir__.gsub('dumb-aliases', '')
-zsh_history_path "#{root_dir}#{ZSH_HISTORY}"
+zsh_history_path = "#{root_dir}#{ZSH_HISTORY}"
 shell_history = File.open("#{root_dir}#{File.exists?(zsh_history_path) ? ZSH_HISTORY : BASH_HISTORY}")
 raise 'shell history file not found' unless shell_history
 
@@ -30,7 +30,7 @@ File.open(ALIASES_FILENAME, 'w') do |alias_file|
   command_counts.each do |command, _|
     next unless command
 
-    first_letters = command.split(/[^a-zA-Z\d:]/).map { |word| word[0] }
+    first_letters = command.split(/[^a-zA-Z\d:]/).map(&:chr)
     next unless first_letters.length > 1 && first_letters.length < 5 # aliases should be short but not too short
 
     alias_file.puts "alias #{first_letters.join}=\"#{command}\""
